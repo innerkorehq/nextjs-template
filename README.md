@@ -34,3 +34,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+# Fonts
+Fonts metadata can be loaded from,
+https://github.com/vercel/next.js/blob/canary/packages/font/src/google/font-data.json
+
+RAW URL,
+https://raw.githubusercontent.com/vercel/next.js/refs/heads/canary/packages/font/src/google/font-data.json
+
+Font name in json & tsx is seprated by space replaced with underscore (_) as defined here,
+https://github.com/vercel/next.js/blob/bdb12360376a6996d84cac06b7c3a2671232973a/packages/font/src/google/validate-google-font-function-call.ts#L40
+
+
+Files needs to be generated on run time by build system,
+- @/lib/fonts.tsx
+- @/lib/icons.tsx
