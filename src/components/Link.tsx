@@ -5,6 +5,7 @@ export interface LinkProps {
     href: string;
     className?: string;
     target?: string;
+    rel?: string;
 }
 
 const Link = ({ className, ...props }: LinkProps) => (
