@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PrimaryFont, HeaderFont } from "@/lib/fonts";
+import { SansFont, SerifFont, MonoFont } from "@/lib/fonts";
 import "./globals.css";
 
 
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${PrimaryFont.variable} antialiased`}
+        className={`${SansFont.variable} antialiased`}
       >
         {children}
       </body>
