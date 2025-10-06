@@ -8,8 +8,10 @@ export interface LinkProps {
     rel?: string;
 }
 
-const Link = ({ className, ...props }: LinkProps) => (
-    <NextLink {...props} className={className} />
+const Link = ({ className, children, ...props }: React.PropsWithChildren<LinkProps>) => (
+    <NextLink {...props} className={className}>
+        {children}
+    </NextLink>
 );
 
 Link.displayName = 'Link';

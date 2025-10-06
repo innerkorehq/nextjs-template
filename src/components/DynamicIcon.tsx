@@ -5,7 +5,7 @@ import { icons } from "@/lib/icons";
 
 type IconName = keyof typeof icons;
 
-export default function DynamicIcon({ name, className }: { name: IconName; className?: string }) {
-  const Icon = icons[name] || icons["SquircleDashed"]; // fallback if not found
+export default function DynamicIcon({ name, className }: { name: string; className?: string }) {
+  const Icon = icons[name as IconName] || icons["SquircleDashed"]; // fallback if not found
   return <Icon className={className ?? "w-5 h-5 text-gray-700"} />;
 }

@@ -1,13 +1,19 @@
-import { Inter, Roboto } from 'next/font/google'
+import { Inter, Roboto_Mono } from 'next/font/google'
  
-export const PrimaryFont = Inter({
+export const SansFont = Inter({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-primary',
+  variable: '--font-sans',
 })
 
-export const HeaderFont = Roboto({
+export const SerifFont = Inter({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-header',
+  variable: '--font-serif',
+})
+
+export const MonoFont = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
 })
