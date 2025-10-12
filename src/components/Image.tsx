@@ -10,6 +10,7 @@ export interface ImageProps extends Omit<NextImageProps, 'placeholder' | 'blurDa
     quality?: number;
     sizes?: string;
     fill?: boolean;
+    placeholder?: string;
     style?: React.CSSProperties;
     className?: string;
 }
