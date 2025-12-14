@@ -12,7 +12,7 @@ export interface ImageProps extends Omit<NextImageProps, 'placeholder' | 'blurDa
     blurDataURL?: string;
     style?: React.CSSProperties;
     className?: string;
-    type?: 'profile' | 'logo' | 'banner' | 'gallery' | 'thumbnail' | 'icon' | 'other';
+    type?: "profile" | "logo" | "banner" | "gallery" | "thumbnail" | "icon" | "other" | "background";
 }
 
 const isExternalSrc = (src: string) =>
