@@ -6,10 +6,11 @@ export interface LinkProps {
     className?: string;
     target?: string;
     rel?: string;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-const Link = ({ className, children, ...props }: React.PropsWithChildren<LinkProps>) => (
-    <NextLink {...props} className={className}>
+const Link = ({ className, children, onClick, ...props }: React.PropsWithChildren<LinkProps>) => (
+    <NextLink {...props} className={className} onClick={onClick}>
         {children}
     </NextLink>
 );
