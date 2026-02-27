@@ -1,82 +1,42 @@
 import React from 'react';
 import NextImage, { ImageProps as NextImageProps } from 'next/image';
 
-export interface ImageProps extends Omit<NextImageProps, 'placeholder' | 'blurDataURL'> {
+export interface ImageProps {
     src: string;
     alt: string;
     width?: number;
     height?: number;
-    priority?: boolean;
     quality?: number;
     sizes?: string;
-    blurDataURL?: string;
-    style?: React.CSSProperties;
     className?: string;
     type?: "profile" | "logo" | "banner" | "gallery" | "thumbnail" | "icon" | "other" | "background";
 }
 
-const isExternalSrc = (src: string) =>
-    /^https?:\/\//i.test(src) || src.startsWith('//') || src.startsWith('data:');
+type Props = ImageProps & NextImageProps & { placeholder?: never };
 
-const Image: React.FC<ImageProps> = (props) => {
-    const {
-        src,
-        alt,
-        width = 1280,
-        height = 720,
-        priority = false,
-        quality,
-        sizes,
-        className,
-        style,
-        loading,
-        onLoadingComplete,
-        unoptimized,
-        loader,
-        type,
-        ...rest
-    } = props;
+type ImageType = ImageProps['type'];
 
-    if (!src) {
-        return null;
-    }
+const TYPE_SIZES: Record<NonNullable<ImageType>, { width: number; height: number }> = {
+    profile:    { width: 200,  height: 200  },
+    logo:       { width: 300,  height: 100  },
+    banner:     { width: 1920, height: 480  },
+    gallery:    { width: 800,  height: 600  },
+    thumbnail:  { width: 400,  height: 300  },
+    icon:       { width: 64,   height: 64   },
+    background: { width: 1920, height: 1080 },
+    other:      { width: 1280, height: 720  },
+};
 
-    const dimensionProps = { width, height };
+const DEFAULT_SIZE = { width: 1280, height: 720 };
 
-    if (isExternalSrc(src)) {
-        return (
-            <img
-                src={src}
-                alt={alt}
-                className={className}
-                style={style}
-                loading={priority ? 'eager' : loading ?? 'lazy'}
-                sizes={sizes}
-                decoding="async"
-                referrerPolicy="no-referrer"
-                {...dimensionProps}
-                {...rest}
-            />
-        );
-    }
+const Image: React.FC<Props> = ({ type, width, height, ...props }: Props) => {
+    if (!props.src) return null;
 
-    return (
-        <NextImage
-            src={src}
-            alt={alt}
-            {...dimensionProps}
-            priority={priority}
-            quality={quality}
-            sizes={sizes}
-            className={className}
-            style={style}
-            loading={loading}
-            onLoadingComplete={onLoadingComplete}
-            unoptimized={unoptimized}
-            loader={loader}
-            {...rest}
-        />
-    );
+    const defaults = type ? TYPE_SIZES[type] : DEFAULT_SIZE;
+    const resolvedWidth  = width  ?? defaults.width;
+    const resolvedHeight = height ?? defaults.height;
+
+    return <NextImage width={resolvedWidth} height={resolvedHeight} {...props} />;
 };
 
 export default Image;
