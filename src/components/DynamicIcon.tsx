@@ -6,14 +6,13 @@ import type { LucideProps } from 'lucide-react';
 
 export interface DynamicIconProps {
   name: string;
-  className?: string;
   size?: string | number;
   package?: string;
 }
 
 type Props = DynamicIconProps & LucideProps;
 
-export default function DynamicIcon({ name, className, ...rest }: Props) {
+export default function DynamicIcon({ name, size, ...rest }: Props) {
   // Convert PascalCase to kebab-case (e.g., 'ArrowRight' -> 'arrow-right')
   const kebabCaseName = name
     .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -23,7 +22,7 @@ export default function DynamicIcon({ name, className, ...rest }: Props) {
     return (
       <LucideDynamicIcon 
         name={kebabCaseName as any} 
-        className={className ?? "w-5 h-5 text-gray-700"} 
+        size={size || 24}
         {...rest}
       />
     )
