@@ -24,6 +24,7 @@ export default function DynamicIcon({ name, size, className, ...rest }: Props) {
       <LucideDynamicIcon 
         name={kebabCaseName as any} 
         size={size || 24}
+        className={className}
         {...rest}
       />
     )
