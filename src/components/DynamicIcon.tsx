@@ -8,11 +8,12 @@ export interface DynamicIconProps {
   name: string;
   size?: string | number;
   package?: string;
+  className?: string;
 }
 
 type Props = DynamicIconProps & LucideProps;
 
-export default function DynamicIcon({ name, size, ...rest }: Props) {
+export default function DynamicIcon({ name, size, className, ...rest }: Props) {
   // Convert PascalCase to kebab-case (e.g., 'ArrowRight' -> 'arrow-right')
   const kebabCaseName = name
     .replace(/([a-z])([A-Z])/g, '$1-$2')
