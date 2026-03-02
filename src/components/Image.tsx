@@ -29,14 +29,26 @@ const TYPE_SIZES: Record<NonNullable<ImageType>, { width: number; height: number
 
 const DEFAULT_SIZE = { width: 1280, height: 720 };
 
-const Image: React.FC<Props> = ({ type, width, height, ...props }: Props) => {
+const isExternalSrc = (src: string) =>/^https?:\/\//i.test(src) || src.startsWith('//') || src.startsWith('data:');
+
+const Image: React.FC<Props> = ({ type, width, height, quality, sizes, ...props }: Props) => {
     if (!props.src) return null;
+
+    if (isExternalSrc(props.src)) {
+        return (
+            <img
+                width={width}
+                height={height}
+                {...props}
+            />
+        );
+    }
 
     const defaults = type ? TYPE_SIZES[type] : DEFAULT_SIZE;
     const resolvedWidth  = width  ?? defaults.width;
     const resolvedHeight = height ?? defaults.height;
 
-    return <NextImage width={resolvedWidth} height={resolvedHeight} {...props} />;
+    return <NextImage width={resolvedWidth} height={resolvedHeight} quality={quality} sizes={sizes} {...props} />;
 };
 
 export default Image;
