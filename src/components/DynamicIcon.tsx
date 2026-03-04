@@ -9,6 +9,7 @@ export interface DynamicIconProps {
   size?: string | number;
   package?: string;
   className?: string;
+  type: 'icon'
 }
 
 type Props = DynamicIconProps & LucideProps;
